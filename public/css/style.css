@@ -36,12 +36,14 @@ body {
   align-items: flex-start;
 }
 
+.heading_container h1,
 .heading_container h2 {
   position: relative;
   font-weight: bold;
   margin-bottom: 0;
 }
 
+.heading_container h1 span,
 .heading_container h2 span {
   color: #0a97b0;
 }
@@ -394,26 +396,6 @@ a:focus {
   color: #0a97b0;
 }
 
-.info_section .info_social {
-  display: flex;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.info_section .info_social a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  border-radius: 100%;
-  margin-right: 10px;
-  font-size: 24px;
-}
-
-.info_section .info_social a:hover {
-  color: #0a97b0;
-}
-
 .info_section .info_links {
   display: flex;
   flex-direction: column;
@@ -429,37 +411,6 @@ a:focus {
 
 .info_section .info_links a:hover {
   color: #0a97b0;
-}
-
-.info_section form input {
-  border: none;
-  border-bottom: 1px solid #ffffff;
-  background-color: transparent;
-  width: 100%;
-  height: 45px;
-  color: #ffffff;
-  outline: none;
-}
-
-.info_section form input::placeholder {
-  color: #ffffff;
-}
-
-.info_section form button {
-  width: 100%;
-  text-align: center;
-  display: inline-block;
-  padding: 10px 55px;
-  background-color: #0a97b0;
-  color: #ffffff;
-  border-radius: 0;
-  transition: all 0.3s;
-  border: none;
-  margin-top: 15px;
-}
-
-.info_section form button:hover {
-  background-color: #065968;
 }
 
 /* footer section*/
