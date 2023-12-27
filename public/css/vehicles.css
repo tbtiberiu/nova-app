@@ -1,0 +1,67 @@
+.vehicles_section .heading_container {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.vehicles_section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vehicles_section .card a {
+  display: inline-block;
+  padding: 10px 45px;
+  width: 100%;
+  background-color: #0a97b0;
+  color: #ffffff;
+  border-radius: 0px;
+  transition: all 0.3s;
+  border: none;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.vehicles_section .card a:hover {
+  background-color: #065968;
+}
+
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.card-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  margin-bottom: 20px;
+}
+
+.card-deck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  flex: 0 0 calc(30% - 20px);
+  margin-bottom: 20px;
+}
