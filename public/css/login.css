@@ -1,0 +1,52 @@
+.login_section .heading_container {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.login_section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login_section .login_card {
+  border: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+}
+
+.login_section .login_card form {
+  width: 500px;
+}
+
+.login_section .login_card form button {
+  display: inline-block;
+  padding: 10px 45px;
+  width: 100%;
+  background-color: #0a97b0;
+  color: #ffffff;
+  border-radius: 0px;
+  transition: all 0.3s;
+  border: none;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.login_section .login_card form button:hover {
+  background-color: #065968;
+}
+
+.login_section .login_card a {
+  color: #0a97b0;
+  transition: all 0.3s;
+}
+
+.login_section .login_card a:hover {
+  color: #065968;
+}

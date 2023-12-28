@@ -41,6 +41,14 @@ app.get('/contact', (req, res) => {
     res.sendFile(__dirname + '/views/contact.html');
 });
 
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + '/views/login.html');
+});
+
+app.get('/register', (req, res) => {
+    res.sendFile(__dirname + '/views/register.html');
+});
+
 db.connect((error) => {
     if (error) {
         console.error('Error connecting to MySQL database:', error);
