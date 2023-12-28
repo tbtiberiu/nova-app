@@ -2,6 +2,7 @@ import mysql from 'mysql2';
 import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
+import session from 'express-session';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -18,6 +19,12 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+
 const publicDirectory = path.join(__dirname, './public');
 
 app.set('views', './views');
@@ -29,27 +36,32 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { isLoggedIn: req.session.isLoggedIn });
 });
 
 app.get('/vehicles', (req, res) => {
-    res.render('vehicles');
+    res.render('vehicles', { isLoggedIn: req.session.isLoggedIn });
 });
 
 app.get('/about', (req, res) => {
-    res.render('about');
+    res.render('about', { isLoggedIn: req.session.isLoggedIn });
 });
 
 app.get('/contact', (req, res) => {
-    res.render('contact');
+    res.render('contact', { isLoggedIn: req.session.isLoggedIn });
 });
 
 app.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', { isLoggedIn: req.session.isLoggedIn });
 });
 
 app.get('/register', (req, res) => {
-    res.render('register');
+    res.render('register', { isLoggedIn: req.session.isLoggedIn });
+});
+
+app.get('/logout', (req, res) => {
+    req.session.isLoggedIn = false;
+    res.redirect('/');
 });
 
 app.post('/register', (req, res) => {
@@ -59,6 +71,7 @@ app.post('/register', (req, res) => {
         if (error) {
             res.status(500).send('Error registering user');
         } else {
+            req.session.isLoggedIn = true;
             res.redirect('/');
         }
     });
@@ -71,6 +84,7 @@ app.post('/login', (req, res) => {
         if (error || result.length === 0) {
             res.status(401).send('Invalid credentials');
         } else {
+            req.session.isLoggedIn = true;
             res.redirect('/');
         }
     });
