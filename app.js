@@ -21,32 +21,59 @@ const db = mysql.createConnection({
 const publicDirectory = path.join(__dirname, './public');
 
 app.set('views', './views');
-app.set('view engine', 'html');
+app.set('view engine', 'hbs');
 
 app.use(express.static(publicDirectory));
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/index.html');
+    res.render('index');
 });
 
 app.get('/vehicles', (req, res) => {
-    res.sendFile(__dirname + '/views/vehicles.html');
+    res.render('vehicles');
 });
 
 app.get('/about', (req, res) => {
-    res.sendFile(__dirname + '/views/about.html');
+    res.render('about');
 });
 
 app.get('/contact', (req, res) => {
-    res.sendFile(__dirname + '/views/contact.html');
+    res.render('contact');
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/views/login.html');
+    res.render('login');
 });
 
 app.get('/register', (req, res) => {
-    res.sendFile(__dirname + '/views/register.html');
+    res.render('register');
+});
+
+app.post('/register', (req, res) => {
+    const { firstName, lastName, email, password } = req.body;
+    const INSERT_USER_QUERY = `INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)`;
+    db.query(INSERT_USER_QUERY, [firstName, lastName, email, password], (error, result) => {
+        if (error) {
+            res.status(500).send('Error registering user');
+        } else {
+            res.redirect('/');
+        }
+    });
+});
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    const SELECT_USER_QUERY = `SELECT * FROM users WHERE email = ? AND password = ?`;
+    db.query(SELECT_USER_QUERY, [email, password], (error, result) => {
+        if (error || result.length === 0) {
+            res.status(401).send('Invalid credentials');
+        } else {
+            res.redirect('/');
+        }
+    });
 });
 
 db.connect((error) => {
@@ -61,79 +88,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-
-db.end();
-
-// const express = require('express');
-// const mysql = require('mysql2');
-// const bodyParser = require('body-parser');
-
-// const app = express();
-
-// // MySQL Connection
-// const db = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'your_mysql_username',
-//     password: 'your_mysql_password',
-//     database: 'your_database_name'
-// });
-
-// // Connect
-// db.connect((err) => {
-//     if (err) {
-//         throw err;
-//     }
-//     console.log('MySQL Connected...');
-// });
-
-// // Body Parser Middleware
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
-
-// // Set up views directory
-// app.set('views', './views');
-// app.set('view engine', 'html');
-
-// // Serve static files
-// app.use(express.static('public'));
-
-// // Route for homepage
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/views/login.html');
-// });
-
-// // Route for registration page
-// app.get('/register', (req, res) => {
-//     res.sendFile(__dirname + '/views/register.html');
-// });
-
-// // Registration POST route
-// app.post('/register', (req, res) => {
-//     const { username, password } = req.body;
-//     const INSERT_USER_QUERY = `INSERT INTO users (username, password) VALUES (?, ?)`;
-//     db.query(INSERT_USER_QUERY, [username, password], (err, result) => {
-//         if (err) {
-//             res.status(500).send('Error registering user');
-//         } else {
-//             res.redirect('/');
-//         }
-//     });
-// });
-
-// // Login POST route
-// app.post('/login', (req, res) => {
-//     const { username, password } = req.body;
-//     const SELECT_USER_QUERY = `SELECT * FROM users WHERE username = ? AND password = ?`;
-//     db.query(SELECT_USER_QUERY, [username, password], (err, result) => {
-//         if (err || result.length === 0) {
-//             res.status(401).send('Invalid credentials');
-//         } else {
-//             res.send('Login successful!');
-//         }
-//     });
-// });
-
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-// });
