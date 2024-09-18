@@ -4,7 +4,7 @@
 
 Nova App is a concept website designed to showcase futuristic-looking cars, developed in collaboration with Nova Cars, an imaginary company.
 
-This project was built using Node.js, Handlebars, Express, and MySQL for user registration and login functionality. It has been deployed using Heroku and is accessible at [Nova App on Heroku](https://tbtiberiu-nova-app-8339ae54e906.herokuapp.com/).
+This project was built using Node.js, Handlebars, Express, and MySQL for user registration and login functionality. It has been deployed using Heroku and is accessible at [Nova App on Heroku](https://tbtiberiu-nova-app-8339ae54e906.herokuapp.com/) (Not Avaliable For Now).
 
 ## Features
 
